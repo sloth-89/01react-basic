@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function User({user, onRemoveClick, onToggleClick}){
     // console.log(user)
     
     // 2. propUser 작성 반복을 피하는 방법 - 비구조(구조분해)
     const {username, email, id, active} = user;
+    useEffect(
+        () => {
+            console.log("유저 등록") // 초기화면 랜더링 & 등록버튼 클릭 시 : mount
+            return() => {console.log("유저 삭제")} // 삭제버튼 클릭 시 : unmount
+        }, []
+    )
 
     return(
         <div>
@@ -39,4 +45,4 @@ function UserList({propUsers, onRemove, onToggle}){
     )
 };
 
-export default UserList;
+export default React.memo(UserList);

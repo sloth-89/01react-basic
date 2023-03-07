@@ -1,6 +1,9 @@
 import React from "react";
 
 function ArrayAdd({username, email, onChange, onCreateClick}){
+
+    console.log("ArrayAdd Component! = input, button ")
+
     return(
         <div>
             <input
@@ -22,7 +25,7 @@ function ArrayAdd({username, email, onChange, onCreateClick}){
     )
 }
 
-export default ArrayAdd;
+export default React.memo(ArrayAdd);
 
 
 // map 함수 참고

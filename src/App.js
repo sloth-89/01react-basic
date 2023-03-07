@@ -1,97 +1,173 @@
 
-import React, { useRef, useState } from "react";
-import UserList from './UserList';
-import ArrayAdd from './ArrayAdd';
+// 예제 - useRef() & useEffect() 활용
 
-// 1. mkdir 새폴더명(workspace)
-// 2. open folder - 새폴더명(workspace)
-// 3. npx 새프로젝트폴더명
+import React, { useEffect, useRef } from "react";
+import "./App.css";
 
 function App(){
 
-  const [inputs, setInputs] = useState(
-    {
-      username: "",
-      email: ""
-    });
-  const{username, email} = inputs;
+  const inputRef = useRef();
+
+  useEffect(() => {
+    console.log(inputRef);
+    inputRef.current.focus();
+  }, []) // 초기 랜더링시 focus가 된다.
   
-  const handleChange = (e) => {
-    const {name, value} = e.target; 
-    // e.target은 onChange 이벤트가 설정된 input 태그를 가리킴
-    setInputs({
-      ...inputs,
-      [name]: value
-    })
-  };
-
-  const [users, setUsers] = useState([
-    {
-      id : 1,
-      username : "user1",
-      email : "user1@gmail.com",
-      active : true
-    },
-    {
-      id : 2,
-      username : "user2",
-      email : "user2@gmail.com",
-      active : false
-    },
-    {
-      id : 3,
-      username : "user3",
-      email : "user3@gmail.com",
-      active : false
-    }
-  ]);
-
-  const nextId = useRef(4)
-
-  const handleCreateClick = () => {
-    const user = {
-      id: nextId.current,
-      username,
-      email
-    }
-  
-    setUsers(users.concat(user))
-    setInputs({
-      username: "",
-      email: ""
-    })
-
-    nextId.current += 1;
-
-  };
-
-  const handleRemove = (id) => {
-    setUsers(users.filter(user => user.id !== id));
-  }
-
-  const handleToggleClick = (id) => {
-    setUsers(users.map(user => user.id === id?{...user, active: !user.active}:user));
+  const loginAlert = () => {
+    alert("Welcome! ${inputRef.current.value}")
+    inputRef.current.focus();
   }
 
   return(
-    <>
-      <ArrayAdd
-        username={username}
-        email={email}
-        onChange={handleChange}
-        onCreateClick={handleCreateClick}
-      />
-
-      <UserList
-        propUsers={users}
-        onRemove={handleRemove}
-        onToggle={handleToggleClick}
-      />
-    </>
+    <div className="App">
+      <header className="App-header">
+        <input ref={inputRef} type="text" placeholder="id"/>
+        <input type="password" placeholder="pw"/>
+        <button onClick={loginAlert}>Login</button>
+      </header>
+    </div>
   )
 }
 
 export default App;
+
+// useEffect 예제2.
+
+// import React from "react";
+// import Number from "./Number";
+
+// function App(){
+
+//   return(
+//     <Number/>
+//   )
+// }
+
+// export default App;
+
+// useEffect 예제1
+
+// import React from "react";
+// import UseEffect from "./UseEffect";
+
+// function App(){
+
+//   return(
+//     <UseEffect/>
+//   )
+// }
+
+// export default App;
+
+// 예제 - userList, useMemo, useCallback
+
+// import React, { useCallback, useMemo, useRef, useState } from "react";
+// import UserList from './UserList';
+// import ArrayAdd from './ArrayAdd';
+
+// // 1. mkdir 새폴더명(workspace)
+// // 2. open folder - 새폴더명(workspace)
+// // 3. npx 새프로젝트폴더명
+
+// function App(){
+
+//   function conutActiveUsers(users){
+//     console.log("활성상태 유저명수 계산 중...")
+//     return users.filter(user => user.active).length;
+//   }
+
+//   const [inputs, setInputs] = useState(
+//     {
+//       username: "",
+//       email: ""
+//     });
+//   const{username, email} = inputs;
+  
+//   const handleChange = useCallback((e) => {
+//     const {name, value} = e.target; 
+//     // e.target은 onChange 이벤트가 설정된 input 태그를 가리킴
+//     setInputs({
+//       ...inputs,
+//       [name]: value
+//     })
+//   }, [inputs]);
+
+//   const [users, setUsers] = useState([
+//     {
+//       id : 1,
+//       username : "user1",
+//       email : "user1@gmail.com",
+//       active : true
+//     },
+//     {
+//       id : 2,
+//       username : "user2",
+//       email : "user2@gmail.com",
+//       active : false
+//     },
+//     {
+//       id : 3,
+//       username : "user3",
+//       email : "user3@gmail.com",
+//       active : false
+//     }
+//   ]);
+
+//   const nextId = useRef(4)
+
+//   // useCallback을 사용하지 않으면 컴포넌트가 리랜더링 될때마다, 함수들이 새로 만들어진다.
+//   // 그러나 useCallback을 사용하게 되면 한번 만든 함수를 필요할때만 새로 만들고 '재사용이 가능'해진다 (최적화)
+
+//   const handleCreateClick = useCallback(() => {
+//     const user = {
+//       id: nextId.current,
+//       username,
+//       email
+//     }
+  
+//     // setUsers([...users, user])
+//     setUsers(users => users.concat(user))
+    
+//     setInputs({
+//       username: "",
+//       email: ""
+//     })
+
+//     nextId.current += 1;
+
+//   }, [username, email]);
+
+//   const handleRemove = useCallback((id) => {
+//     setUsers(users.filter(user => user.id !== id));
+//   }, [users])
+
+//   const handleToggleClick = useCallback((id) => {
+//     setUsers(users.map(user => user.id === id?{...user, active: !user.active}:user));
+//   }, [users])
+
+//   const count = useMemo(() => conutActiveUsers(users), [users]);
+
+//   return(
+//     <>
+//       <ArrayAdd
+//         username={username}
+//         email={email}
+//         onChange={handleChange}
+//         onCreateClick={handleCreateClick}
+//       />
+
+//       <UserList
+//         propUsers={users}
+//         onRemove={handleRemove}
+//         onToggle={handleToggleClick}
+//         count={conutActiveUsers}
+//       />
+//       <div>활성 사용자 수 : {count}</div>
+//     </>
+//   )
+// }
+
+// export default App;
 
 // // import logo from './logo.svg';
 // import './App.css';
