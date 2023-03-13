@@ -1,35 +1,53 @@
 
-// 예제 - useRef() & useEffect() 활용
+// [MathQuiz] - useRef, useState 연습
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import MathQuiz from "./MathQuiz";
 import "./App.css";
 
 function App(){
 
-  const inputRef = useRef();
-
-  useEffect(() => {
-    console.log(inputRef);
-    inputRef.current.focus();
-  }, []) // 초기 랜더링시 focus가 된다.
-  
-  const loginAlert = () => {
-    alert("Welcome! ${inputRef.current.value}")
-    inputRef.current.focus();
-  }
-
   return(
-    <div className="App">
-      <header className="App-header">
-        <input ref={inputRef} type="text" placeholder="id"/>
-        <input type="password" placeholder="pw"/>
-        <button onClick={loginAlert}>Login</button>
-      </header>
-    </div>
+    <>
+      <MathQuiz/>
+    </>
   )
 }
 
 export default App;
+
+
+// 예제 - useRef() & useEffect() 활용
+
+// import React, { useEffect, useRef } from "react";
+// import "./App.css";
+
+// function App(){
+
+//   const inputRef = useRef();
+
+//   useEffect(() => {
+//     console.log(inputRef);
+//     inputRef.current.focus();
+//   }, []) // []의 의미 : 웹사이트에 들어오자마자 첫화면에서 랜더링될 때 id 인풋창에 포커스가 되도록 한다.
+  
+//   const loginAlert = () => {
+//     alert("Welcome!")
+//     inputRef.current.focus();
+//   } // onClick에 대한 기능 설정
+
+//   return(
+//     <div className="App">
+//       <header className="App-header">
+//         <input ref={inputRef} type="text" placeholder="id"/>
+//         <input type="password" placeholder="pw"/>
+//         <button onClick={loginAlert}>Login</button>
+//       </header>
+//     </div>
+//   )
+// }
+
+// export default App;
 
 // useEffect 예제2.
 
