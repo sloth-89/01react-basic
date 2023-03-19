@@ -16,6 +16,7 @@ function Board(){
             <button className="square" onClick={()=>{selectSquare(index)}}>
                 {squares[index]}
             </button>
+            <button></button>
         )
     }
 
