@@ -1,20 +1,55 @@
 
-// [MathQuiz] - useRef, useState 연습
+// useReducer 연습 2
 
 import React from "react";
-import MathQuiz from "./MathQuiz";
-import "./App.css";
+import Game from "./Game";
 
 function App(){
 
   return(
-    <>
-      <MathQuiz/>
-    </>
+    <div>
+      <Game/>
+    </div>
   )
 }
 
 export default App;
+
+// useReducer 연습 1
+
+// import React from "react";
+// import ReducerCounter from "./ReducerCounter";
+// import "./App.css";
+
+// function App(){
+
+//   return(
+//     <div>
+//       <ReducerCounter/>
+//       <ReducerCounter step={1} min={-3} max={5}/>
+//       <ReducerCounter step={5} min={-10} max={10}/>
+//     </div>
+//   )
+// }
+
+// export default App;
+
+// [MathQuiz] - useRef, useState 연습
+
+// import React from "react";
+// import MathQuiz from "./MathQuiz";
+// import "./App.css";
+
+// function App(){
+
+//   return(
+//     <>
+//       <MathQuiz/>
+//     </>
+//   )
+// }
+
+// export default App;
 
 
 // 예제 - useRef() & useEffect() 활용
