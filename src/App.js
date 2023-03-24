@@ -1,4 +1,20 @@
 
+// 리액트 hooks 함수들 - 중요
+// useState
+// useEffect
+// useRef
+// useReducer
+// useMemo
+
+//자바스크립트 함수 사용식
+// function 함수이름(파라미터){} - 함수 생성 후
+// 함수이름(파라미터 값) - 으로 불러온다
+
+// 1. custom hooks (커스텀 훅스)
+//      직접 로직, 함수를 짜서 조작하고 활용하는 것.
+// 2. contextAPI
+//      
+
 // useReducer 연습 2
 
 import React from "react";
@@ -112,6 +128,126 @@ export default App;
 
 // export default App;
 
+
+// [UserList, CreateUser 구현 - 2. useReducer 함수로 구현]
+
+// import React, { useCallback, useMemo, useReducer, useRef } from "react";
+// import UserList from "./UserList";
+// import ArrayAdd from "./ArrayAdd";
+
+// function countActiveUsers(users){
+//   console.log("활성 사용자수를 세는 중...")
+//   return users.filter(user => user.active).length;
+// }
+
+// const initialState = {
+//   inputs: {username: "", email: ""},
+//   users: [
+//     {
+//       id : 1,
+//       username : "user1",
+//       email : "user1@gmail.com",
+//       active : true
+//     },
+//     {
+//       id : 2,
+//       username : "user2",
+//       email : "user2@gmail.com",
+//       active : false
+//     },
+//     {
+//       id : 3,
+//       username : "user3",
+//       email : "user3@gmail.com",
+//       active : false
+//     }
+//   ]
+// }
+
+// function reducer(state, action){
+//   switch(action.type){
+//     case "CHANGE_INPUT":
+//       return {...state,
+//               input: {...state.inputs, [action.name] : action.value}
+//       };
+//     case "CREATE_USER":
+//       return {inputs: initialState.inputs,
+//               users: state.users.concat(action.user)
+//       };
+//     case "TOGGLE_USER":
+//       return {...state,
+//               users: state.users.map((user) => 
+//                 user.id === action.id?{...user, active: !user.active} : user)
+//       };
+//     case "REMOVE_USER":
+//       return {...state, 
+//               users: state.users.filter((user) =>
+//                 user.id !== action.id) // 삭제 클릭된 id값 빼고 남긴다.
+//       };
+//     default:
+//       return state;
+//   }
+// }
+
+// function App(){
+
+//   const [state, dispatch] = useReducer(reducer, initialState);
+//   const nextId = useRef(4);
+//   const {users} = state;
+//   const {username, email} = state.inputs;
+
+//   const handleChange = useCallback((e) => {
+//     const {name, value} = e.target;
+//     dispatch({
+//       type: "CHANGE_INPUT", name, value
+//     })
+//   }, []) // depts 자리에 빈공간으로 넣으면 이미 만든 함수를 계속 쓰겠다는 최적화의 의미
+
+//   const handleCreateClick = useCallback(() => {
+//     dispatch({
+//       type: "CREATE_USER",
+//       user: {id: nextId.current, username, email}
+//     })
+//     nextId.current+=1;
+//   }, [username, email]) // usecallback에 참조한 값을 넣어줌
+
+//   const handleToggleClick = useCallback((id) => {
+//     dispatch({
+//       type: "TOGGLE_USER",
+//       id
+//     })
+//   }, [])
+
+//   const handleRemove = useCallback((id) => {
+//     dispatch({
+//       type: "REMOVE_USER",
+//       id
+//     })
+//   }, [])
+
+//   const count = useMemo(() => countActiveUsers(users), [users]);
+
+//   return(
+//     <>
+//       <ArrayAdd
+//         username={username}
+//         email={email}
+//         onChange={handleChange}
+//         onCreateClick={handleCreateClick}
+//       />
+//       <UserList 
+//         propUsers={users}
+//         onToggle={handleToggleClick}
+//         onRemove={handleRemove}
+//       />
+//       <div>활성 사용자 수 : {count}</div>
+//     </>
+//   )
+// }
+
+// export default App;
+
+// [UserList, CreateUser 구현 - 1. useState 함수로 구현]
 // 예제 - userList, useMemo, useCallback
 
 // import React, { useCallback, useMemo, useRef, useState } from "react";

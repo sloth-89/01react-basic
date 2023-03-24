@@ -35,3 +35,8 @@ function ReducerCounter({step=1, min=0, max=10}){
 }
 
 export default ReducerCounter;
+
+// useReducer는 useState(초기값의 업데이트 되는 데이터 관리)와 비슷한 기능을 한다. useState로 해결이되면 Reducer까지 사용하진 않는다. 복잡한 구조는 Reducer를 사용한다.
+
+// dispatch는 reducer 함수를 실행시킨다.
+// switch case로 type을 원하는 대로 임의로 지정할 수 있으며 action에 넣어 class나 id처럼 dispatch에 담아서 적용가능하다.
