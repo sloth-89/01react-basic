@@ -9,6 +9,9 @@ import "./game.css";
 // console.log(squares2) // [null, null, null, null, null, null, null, null, null]
 // console.log(squares3) // ["데이터값", "데이터값", "데이터값", "데이터값", "데이터값", "데이터값", "데이터값", "데이터값", "데이터값"]
 
+function dsajfd(){
+    
+}
 // 게임 상단 문구
 function getStatus(squares, xIsNext){
     const winner = calculateWinner(squares);
