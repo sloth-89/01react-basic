@@ -35,7 +35,7 @@ function gameReducer(state, action){
             const squaresCopy = [...squares];
             squaresCopy[square] = xIsNext ? "X" : "O";
             return {
-                square: squaresCopy,
+                squares: squaresCopy,
                 xIsNext: !xIsNext
             };
         }

@@ -17,9 +17,11 @@
 // 1. custom hooks (커스텀 훅스)
 //      직접 로직, 함수를 짜서 조작하고 활용하는 것.
 // 2. contextAPI
-//      
+//      중간 컴포넌트에 보냄없이 바로 마지막 컴포넌트로 보내는 방식
 
-//
+
+
+// [contextAPI활용 예제]
 
 import React from "react";
 import ContextSample from "./ContextSample";
@@ -33,6 +35,21 @@ function App(){
 }
 
 export default App;
+
+// [OXGame 예제]
+// import React from "react";
+// import Game from "./Game";
+// import "./App.css";
+
+// function App(){
+//   return(
+//     <div className="App-header">
+//      <Game/>
+//     </div>
+//   )
+// }
+
+// export default App;
 
 // [useCallback 예제 - 스마트홈]
 
@@ -51,6 +68,8 @@ export default App;
 
 // export default App;
 
+
+
 // [Custom Hooks] 활용 예제
 
 // import React, { useRef, useReducer, useMemo, useCallback } from 'react';
@@ -58,13 +77,10 @@ export default App;
 // import ArrayAdd from './ArrayAdd';
 // import useInputs from './useInputs';
 
-
-
 // function countActiveUsers(users) {
 //   console.log('활성 사용자 수를 세는중...');
 //   return users.filter(user => user.active).length;
 // }
-
 
 // // 2. useReducer() 의 두번째 파라미터 initialState : 기존코드 useState(초기값정의) 함수를 사용한 배열2개를 inputs 배열과 users배열의 초기값을 initialState 변수에 넣어둠 
 // const initialState = {
@@ -178,19 +194,18 @@ export default App;
 
 // export default App;
 
+
+
 // [UserList, CreateUser 구현 - 2. useReducer 함수로 구현]
 
 // import React, { useRef, useReducer, useMemo, useCallback } from 'react';
 // import UserList from './UserList';
 // import ArrayAdd from './ArrayAdd';
 
-
-
 // function countActiveUsers(users) {
 //   console.log('활성 사용자 수를 세는중...');
 //   return users.filter(user => user.active).length;
 // }
-
 
 // // 2. useReducer() 의 두번째 파라미터 initialState : 기존코드 useState(초기값정의) 함수를 사용한 배열2개를 inputs 배열과 users배열의 초기값을 initialState 변수에 넣어둠 
 // const initialState = {
@@ -294,6 +309,7 @@ export default App;
 // }
 
 // export default App;
+
 
 
 // [UserList, CreateUser 구현 - 1. useState 함수로 구현]
@@ -407,6 +423,8 @@ export default App;
 
 // export default App;
 
+
+
 // useReducer 연습 2
 
 // import React from "react";
@@ -422,6 +440,8 @@ export default App;
 // }
 
 // export default App;
+
+
 
 // useReducer 연습 1
 
@@ -460,6 +480,8 @@ export default App;
 // export default App;
 
 
+
+
 // 예제 - useRef() & useEffect() 활용
 
 // import React, { useEffect, useRef } from "react";
@@ -492,6 +514,8 @@ export default App;
 
 // export default App;
 
+
+
 // useEffect 예제2.
 
 // import React from "react";
@@ -506,6 +530,8 @@ export default App;
 
 // export default App;
 
+
+
 // useEffect 예제1
 
 // import React from "react";
@@ -519,6 +545,8 @@ export default App;
 // }
 
 // export default App;
+
+
 
 // // import logo from './logo.svg';
 // import './App.css';
@@ -572,6 +600,8 @@ export default App;
 
 // // export default App;
 
+
+
 // // 07 - arrayRender - 배열 랜더 방법 2
 // // function App(){
 // //   return(
@@ -580,6 +610,8 @@ export default App;
 // // };
 
 // // export default App;
+
+
 
 // // 06 - arrayRender - 배열 랜더 방법
 // // function App(){
@@ -591,6 +623,8 @@ export default App;
 // // export default App;
 
 
+
+
 // // 05 - useState - input 값 동적 상태변화 반영하기
 // // function App(){
 // //   return(
@@ -599,6 +633,8 @@ export default App;
 // // };
 
 // // export default App;
+
+
 
 // // 04 - useState - 버튼 동적구현
 // // function App(){
@@ -609,6 +645,8 @@ export default App;
 
 // // export default App;
 
+
+
 // // 03 - props : 두 컴포넌트 사이에 데이터 전송 테스트
 // // function App(){
 // //   return (<Hello name="react" color="red"/>)
@@ -616,12 +654,16 @@ export default App;
 
 // // export default App;
 
+
+
 // // 02 - 컴포넌트 export, import 연습
 // // function App(){
 // //   return <MyComponent/>;
 // // }
 
 // // export default App;
+
+
 
 // // 01 - JSX 테스트
 // // function App() {
