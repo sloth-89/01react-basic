@@ -19,18 +19,39 @@
 // 2. contextAPI
 //      
 
-// [useCallback 예제 - 스마트홈]
+//
 
 import React from "react";
-import SmartHome from "./SmartHome";
+import ContextSample from "./ContextSample";
 
 function App(){
-  return
+
+  return(
+      <ContextSample/>
+  )
+
 }
 
 export default App;
 
-// [Custom Hooks] 활용
+// [useCallback 예제 - 스마트홈]
+
+// import React from "react";
+// import SmartHome from "./SmartHome";
+// import "./App.css"
+
+// function App(){
+//   return(
+//     <div className="App-header">
+//       <h3>My Smart Home Light</h3>
+//       <SmartHome/>
+//     </div>
+//   )
+// }
+
+// export default App;
+
+// [Custom Hooks] 활용 예제
 
 // import React, { useRef, useReducer, useMemo, useCallback } from 'react';
 // import UserList from './UserList';
