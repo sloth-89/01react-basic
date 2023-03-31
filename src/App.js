@@ -19,22 +19,209 @@
 // 2. contextAPI
 //      중간 컴포넌트에 보냄없이 바로 마지막 컴포넌트로 보내는 방식
 
+// reduce 문법 형식
+// reduce((accumulator(축적값), currentValue(입력값)) => {return}, initialValue(초기값))
+
+
+
+
+
+
+
+// [Class형 Component 예제]
+// 리액트 컴포넌트 생성 방법에는 2가지가 있다.
+// 1. function 컴포넌트명(){} - 함수형 컴포넌트
+// 2. import React, {Component} from 'react';
+//    class 컴포넌트명 extends Component {} - 클래스형 컴포넌트
+
+import React from "react";
+import ClassCounter from "./ClassCounter";
+import './App.css';
+
+function App(){
+    return(
+        <>
+            <ClassCounter/>
+        </>
+    )
+}
+
+export default App;
+
+
+
+// [immer 예제] - reducer() 업데이트 함수에서 spread 연산자를 대체해서 produce(state,draft=>{}) 방식으로 작성
+// reducer()로 하기에 복잡할 경우 immer 방식으로 하면 편한 경우가 있다.
+
+// import React, { useRef, useReducer, useMemo, useCallback } from 'react';
+// import UserList from './UserList';
+// import ArrayAdd from './ArrayAdd';
+// import useInputs from './useInputs';
+// import produce from 'immer'; // 1) yarn add immer 명령어로 설치 후, import 해주기
+
+// window.produce = produce;
+
+// // const state = {changeNumber: 1, fixedNumber: 2}
+// // const nextState = produce(state, draft => {draft.changeNumber+=3})
+// // console.log(nextState)
+// // 을 입력하면 produce 함수에 대한 결과 확인 가능
+
+// function countActiveUsers(users) {
+//   console.log('활성 사용자 수를 세는중...');
+//   return users.filter(user => user.active).length;
+// }
+
+// // 2. useReducer() 의 두번째 파라미터 initialState : 기존코드 useState(초기값정의) 함수를 사용한 배열2개를 inputs 배열과 users배열의 초기값을 initialState 변수에 넣어둠 
+// const initialState = {
+//   // inputs:{ username: '', email: ''},
+//   users: [ { id: 1, username: 'user1',email: 'user1@gmail.com', active: true },
+//            { id: 2, username: 'user2', email: 'user2@gmail.com', active: false },
+//            { id: 3, username: 'user3', email: 'user3@gmail.com' , active: false }
+//          ]
+// };
+
+// // 3. useReducer() 의 첫번째 파라미터 reducer:
+// function reducer(state, action) {
+//   switch (action.type) {
+//       // case 'CHANGE_INPUT':
+//       //   return { ...state,
+//       //             inputs: { ...state.inputs, 
+//       //                       [action.name]: action.value
+//       //                     }
+//       //   };
+
+//       case 'CREATE_USER':
+//         return produce(state, draft => {
+//             draft.users.push(action.user)
+//         })
+//         // return { inputs: initialState.inputs,
+//         //          users: state.users.concat(action.user)
+//         // };
+
+//       case 'TOGGLE_USER':
+//         return produce(state, draft => {
+//             const user = draft.users.find(user => user.id === action.id)
+//             user.active = !user.active;
+//         })
+//         // return { ...state,
+//         //          users: state.users.map(user =>
+//         //               user.id === action.id ? { ...user, active: !user.active } : user
+//         //               )
+//         // };
+        
+//       case 'REMOVE_USER':
+//         return produce(state, draft => {
+//             const index = draft.users.findIndex(user => user.id === action.id);
+//             draft.users.splice(index, 1); 
+//             // splice는 원하는 인덱스의 값부터, 데이터 개수 삭제하거나, 삭제하고 추가
+//             // splice(배열의 인덱스 값, 인덱스 값부터 삭제할 데이터 개수, 추가할 데이터, 추가할 데이터,...)
+//             // 인덱스 값만 입력 시 그 인덱스 값 이후의 데이터 모두 다 삭제된다.
+//         })
+//         // return {  ...state,
+//         //             users: state.users.filter(user => user.id !== action.id)
+//         // };
+
+//       default:
+//         return state;
+//   }
+// }
+// // 리액트에서 배열의 업데이트는 push, splice 등의 함수를 사용하거나 항목을 직접 수정하면 안되고,
+// // 위 처럼 concat, map, filter를 사용해야한다.
+
+// function App() {
+
+//   const [state, dispatch] = useReducer(reducer, initialState); 
+
+//   const [form, handleInputChange, reset] = useInputs({
+//     username: "",
+//     email: ""
+//   })
+//   const {username, email} = form
+
+//   // const { username, email } = state.inputs;
+//   const { users } = state;
+
+//   const nextId = useRef(4);
+
+//   console.log(state);
+
+//   // const handleInputChange  = useCallback(e => {
+//   //   const { name, value } = e.target;
+//   //   dispatch({
+//   //     type: 'CHANGE_INPUT', 
+//   //     name, 
+//   //     value
+//   //   });
+//   // }, []);
+
+//   const handleCreateClick  = useCallback(() => {
+//     dispatch({
+//       type: 'CREATE_USER',
+//       user: {
+//         id: nextId.current,
+//         username,
+//         email
+//       }
+//     });
+//     reset();
+//     nextId.current += 1;
+//   }, [username, email, reset]);
+
+//   const handleToggleClick  = useCallback(id => {
+//     dispatch({
+//       type: 'TOGGLE_USER',
+//       id
+//     });
+//   }, []);
+
+//   const handleDeleteClick  = useCallback(id => {
+//     dispatch({
+//       type: 'REMOVE_USER',
+//       id
+//     });
+//   }, []);
+
+//   const count = useMemo(() => countActiveUsers(users), [users]);
+
+//   return (
+//     <>
+//       <ArrayAdd
+//         username={username}
+//         email={email}
+//         onInputChange={handleInputChange }
+//         onCreateClick={handleCreateClick }
+//       />
+//       <UserList
+//         propUsers={users}
+//         toggleClick={handleToggleClick }
+//         deleteClick={handleDeleteClick }
+//       />
+//       <div>활성사용자 수 : {count}</div>
+//     </>
+//   );
+// }
+
+// export default App;
+
 
 
 // [contextAPI활용 예제]
 
-import React from "react";
-import ContextSample from "./ContextSample";
+// import React from "react";
+// import ContextSample from "./ContextSample";
 
-function App(){
+// function App(){
 
-  return(
-      <ContextSample/>
-  )
+//   return(
+//       <ContextSample/>
+//   )
 
-}
+// }
 
-export default App;
+// export default App;
+
+
+
 
 // [OXGame 예제]
 // import React from "react";
@@ -50,6 +237,9 @@ export default App;
 // }
 
 // export default App;
+
+
+
 
 // [useCallback 예제 - 스마트홈]
 
@@ -118,6 +308,8 @@ export default App;
 //       return state;
 //   }
 // }
+// // 리액트에서 배열의 업데이트는 push, splice 등의 함수를 사용하거나 항목을 직접 수정하면 안되고,
+// // 위 처럼 concat, map, filter를 사용해야한다.
 
 // function App() {
 
